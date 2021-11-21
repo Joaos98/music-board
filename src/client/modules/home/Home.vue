@@ -5,7 +5,7 @@
 		</div>
 		<div class="board">
 			<div v-for="album of albums.slice(0, 15)">
-				<AlbumView :album="album"/>
+				<AlbumView :album="album" :mostListens="mostListens"/>
 			</div>
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 		},
 		computed: {
 			mostListens() {
-				return this.albums[0].playcount;
+				return parseInt(this.albums[0].playcount);
 			}
 		}
 	}
