@@ -25,14 +25,14 @@
             album: {
                 type: Object,
                 required: 'true'
-            }
+            },
         },
     }
 </script>
 
 <style lang="scss" scoped>
     .album {
-        --size: 150px;
+        --size: 170px;
 
         position: relative;
 
@@ -55,7 +55,7 @@
             z-index: 10;
             background: linear-gradient(0deg, rgba(0,0,0,.80) 0%, rgba(0,0,0,0) 100%);
 
-            font-size: 0.8em;
+            font-size: 0.7em;
             //text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
             &:hover {
@@ -63,17 +63,18 @@
                 transition: opacity 0.5s;
             }
 
-            .albumArtist, .albumName, .playCount {
+            .albumName, .albumArtist {
                 color: white;
+                padding: 0px 0px 3px 3px;
             }
-        }
 
-        .playCount {
-            position: absolute;
-            right: 0;
-            top: 0;
+            .playCount {
+                position: absolute;
+                right: 0;
+                top: 0;
 
-            padding: 3px 6px;
+                padding: 3px 6px;
+            }
         }
 
         img {

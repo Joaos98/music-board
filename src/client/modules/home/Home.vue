@@ -1,9 +1,15 @@
 <template>
-	<div class="board">
-		<div v-for="album of albums">
-			<AlbumView :album="album" />
+	<div class="wrapper">
+		<div class="header">
+			{{user}}'s Music Board
+		</div>
+		<div class="board">
+			<div v-for="album of albums.slice(0, 15)">
+				<AlbumView :album="album"/>
+			</div>
 		</div>
 	</div>
+
 </template>
 
 <script>
@@ -17,16 +23,36 @@
 		},
 		data: () => ({
 			albums: [],
+			user: '',
 		}),
 		async mounted() {
-			this.albums = await apiService.getTopAlbums('Joaos98');
+			let data = await apiService.getTopAlbums('Joaos98');
+			this.albums = data.album;
+			this.user = data['@attr'].user;
 		},
+		computed: {
+			mostListens() {
+				return this.albums[0].playcount;
+			}
+		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.board {
+	.wrapper {
 		display: flex;
-		flex-wrap: wrap;
+		flex-direction: column;
+		align-items: center;
+
+		.header {
+			min-height: 100px;
+		}
+
+		.board {
+			width: 70%;
+			display: flex;
+			flex-wrap: wrap;
+		}
 	}
+
 </style>
