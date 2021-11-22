@@ -1,58 +1,91 @@
 <template>
-	<div class="wrapper">
-		<div class="header">
-			{{user}}'s Music Board
-		</div>
-		<div class="board">
-			<div v-for="album of albums.slice(0, 15)">
-				<AlbumView :album="album" :mostListens="mostListens"/>
-			</div>
-		</div>
-	</div>
-
+    <div class="content">
+        <div class="header">
+            <h1>
+                Music Board
+            </h1>
+            <h2>
+                <span>See</span> what you hear
+            </h2>
+        </div>
+        <div class="search">
+            <input
+                    class="searchInput"
+                    type="text"
+                    v-model="user"
+                    placeholder="Insira um usuário"
+            >
+            <router-link
+                    :to="`/user/${user}`"
+                    :disabled="user"
+                    class="searchButton"
+            >
+                <!--<FaIcon >search</FaIcon>-->
+                Pesquisar
+            </router-link>
+        </div>
+    </div>
 </template>
 
 <script>
-	import {apiService} from "../../services/api.js";
-	import AlbumView from "../../components/AlbumView.vue";
-
-	export default {
-		name: 'Home',
-		components: {
-			AlbumView
-		},
-		data: () => ({
-			albums: [],
-			user: '',
-		}),
-		async mounted() {
-			let data = await apiService.getTopAlbums('Joaos98');
-			this.albums = data.album;
-			this.user = data['@attr'].user;
-		},
-		computed: {
-			mostListens() {
-				return parseInt(this.albums[0].playcount);
-			}
-		}
-	}
+    import FaIcon from "../../components/FaIcon.vue";
+    export default {
+        name: "Home",
+        components: {FaIcon},
+        data: () => ({
+            user: ''
+        })
+    }
 </script>
 
 <style lang="scss" scoped>
-	.wrapper {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+    .content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        //height: 100vh;
+        align-items: center;
 
-		.header {
-			min-height: 100px;
-		}
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-		.board {
-			width: 70%;
-			display: flex;
-			flex-wrap: wrap;
-		}
-	}
+            h1, h2 {
+                margin: 0 0 0.5em 0;
+            }
 
+            span {
+                color: yellow;
+            }
+        }
+
+        .search {
+            font-size: 1em;
+
+            .searchInput, .searchButton {
+                font-size: inherit;
+                box-sizing: content-box;
+                padding: 0.3em;
+            }
+
+            .searchInput {
+                border-radius: 5px 0 0 5px;
+                border: none;
+            }
+
+            .searchButton {
+                background-color: #d92323;
+                color: white;
+                border-radius: 0 5px 5px 0;
+                text-decoration: none;
+                transition: 0.3s;
+
+                &:hover {
+                    background-color: #f71414;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
 </style>
