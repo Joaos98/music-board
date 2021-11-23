@@ -20,8 +20,7 @@
                     :disabled="user"
                     class="searchButton"
             >
-                <!--<FaIcon >search</FaIcon>-->
-                Pesquisar
+                <FaIcon >search</FaIcon>
             </router-link>
         </div>
     </div>
@@ -33,8 +32,12 @@
         name: "Home",
         components: {FaIcon},
         data: () => ({
-            user: ''
-        })
+            user: '',
+            mounted: false
+        }),
+        mounted() {
+            this.mounted = true;
+        }
     }
 </script>
 
@@ -42,9 +45,16 @@
     .content {
         display: flex;
         flex-direction: column;
-        width: 100%;
-        //height: 100vh;
+        width: fit-content;
+        min-height: 300px;
+        margin: auto;
         align-items: center;
+        border-radius: 10px;
+        border: 2px solid #1c2f34;
+        background-color: #273e42;
+        box-shadow: 0 0 20px black;
+        padding: 0 40px;
+        justify-content: space-evenly;
 
         .header {
             display: flex;

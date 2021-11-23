@@ -11,7 +11,7 @@ async function startServer() {
 			enabled: false
 		},
 		ssr: {
-			enabled: true
+			enabled: false
 		},
 
 		port: 8420,

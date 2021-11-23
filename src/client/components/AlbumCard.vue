@@ -24,7 +24,7 @@
 
 <script>
     export default {
-        name: "AlbumView",
+        name: "AlbumCard",
         data: () => ({
 
         }),
@@ -45,6 +45,7 @@
     .album {
         position: relative;
         transition: filter 0.3s, transform 0.2s;
+        box-shadow: 0 0 10px rgba(black, 50%);
 
         .albumInfo {
             display: flex;

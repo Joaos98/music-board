@@ -1,11 +1,13 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import {
-    faTimes
+    faTimes,
+	faSearch
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-    faTimes
+    faTimes,
+	faSearch
 );
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

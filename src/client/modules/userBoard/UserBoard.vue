@@ -51,6 +51,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		margin: auto;
 
 		.header {
 			min-height: 100px;
