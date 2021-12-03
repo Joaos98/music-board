@@ -5,8 +5,8 @@ const api = axios.create({
 });
 
 export const apiService = {
-	async getTopAlbums(user) {
-		let { data } = await api.get(`/topAlbums/${user}`);
+	async getTopAlbums(user, period) {
+		let { data } = await api.get(`/topAlbums?user=${user}&period=${period}`);
 
 		return data ? data : [];
 	}
