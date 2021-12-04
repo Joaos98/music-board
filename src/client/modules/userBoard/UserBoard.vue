@@ -4,28 +4,37 @@
 			<h1>
 				{{user}}'s Music Board
 			</h1>
-			<div>
-				<select v-model="period" name="period">
-					<option value="1">1 Mês</option>
-					<option value="3" selected>3 Mêses</option>
-					<option value="6">6 Mêses</option>
-					<option value="12">12 Mêses</option>
-				</select>
-				<select v-model="limit" name="limit">
-					<option value="5">5 Albums</option>
-					<option value="10" selected>10 Albums</option>
-					<option value="15">15 Albums</option>
-				</select>
+		</div>
+		<div class="content">
+			<div v-if="!loading" class="board">
+				<AlbumCard v-for="album of AlbumList" :album="album" :mostListens="mostListens"/>
 			</div>
-			<router-link to="/">
-				Voltar
-			</router-link>
-		</div>
-		<div v-if="!loading" class="board">
-			<AlbumCard v-for="album of AlbumList" :album="album" :mostListens="mostListens"/>
-		</div>
-		<div v-else>
-			Carregando
+			<div class="board" v-else>
+				Carregando
+			</div>
+
+			<div class="settings">
+				<div class="select">
+					<p>Time Period</p>
+					<select v-model="period" name="period">
+						<option value="1">1 Month</option>
+						<option value="3" selected>3 Months</option>
+						<option value="6">6 Months</option>
+						<option value="12">12 Months</option>
+					</select>
+				</div>
+				<div class="select">
+					<p>Quantity</p>
+					<select v-model="limit" name="limit">
+						<option value="5">5 Albums</option>
+						<option value="10" selected>10 Albums</option>
+						<option value="15">15 Albums</option>
+					</select>
+				</div>
+				<router-link to="/">
+					Return
+				</router-link>
+			</div>
 		</div>
 	</div>
 
@@ -38,14 +47,14 @@
 	export default {
 		name: 'Home',
 		components: {
-			AlbumCard
+			AlbumCard,
 		},
 		data: () => ({
 			albums: [],
 			user: '',
 			period: 3,
-			limit: 10
-			,
+			limit: 10,
+			value: null,
 			loading: true
 		}),
 		async mounted() {
@@ -80,15 +89,46 @@
 		flex-direction: column;
 		align-items: center;
 		margin: auto;
+		width: 100%;
 
 		.header {
 			min-height: 100px;
 		}
 
-		.board {
-			width: 70%;
+		.content {
 			display: flex;
-			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+
+			.board {
+				width: 70%;
+				display: flex;
+				flex-wrap: wrap;
+			}
+
+			.settings {
+				height: 70%;
+				width: 15%;
+				background-color: rgba(black, 40%);
+				display: flex;
+				flex-direction: column;
+				padding: 10px;
+				align-items: center;
+				justify-content: space-around;
+
+				.select {
+					width: 50%;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+
+					p {
+						font-size: 1em;
+						margin: 0 0 5px 0;
+					}
+				}
+			}
 		}
 	}
 
